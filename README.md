@@ -123,3 +123,18 @@ ref: [https://github.com/docker/labs/tree/master/networking](https://github.com/
     ]
     ```
   - `docker exec -it 6dd93d6cdc80 /bin/bash` 
+
+## 実践 Docker - ソフトウェアエンジニアの「Docker よくわからない」を終わりにする本
+
+ref: https://zenn.dev/suzuki_hoge/books/2022-03-docker-practice-8ae36c33424b59
+
+- > ubuntu:20.04 は当然 Ubuntu ですが、nginx:latest のようなイメージは一度 bash で起動して OS やパッケージマネージャが何かを調べておくのが基本です。
+- ２部: Dockerfile の基礎
+  - Dockerfile 作成後、`docker image build --tag xxxxx .`  
+  - `RUN apt install emacs` でインストールすると対話できないため、`RUN apt install -y emacs` にする。
+  - > 普段目にする Dockerfile は RUN apt update && apt install -y vim のように １つの RUN で複数の Linux コマンドを連続して実行 しているものが大半だと思います。これは RUN がコマンドの結果をレイヤーとして確定する という点に注目すると意図が読み取りやすいです。
+  - > 公開されている Dockerfile は 4 レイヤーしか作っていません。
+- 3部
+  - [work](./work) で演習
+  - `docker image build --file=./docker/app/Dockerfile --tag docker-practice:app .`
+  - > この本ではいきなり Dockerfile を書きましたが、構築手順が定かではない場合はこの方法は効率が悪い です。「PHP のインストールってこれでいいのかな」「msmtp ってどうやってインストールするんだろう」という状態なら、一度ただベースイメージを起動して自分で bash で試行錯誤する とよいでしょう。
