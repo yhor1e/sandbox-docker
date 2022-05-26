@@ -138,3 +138,14 @@ ref: https://zenn.dev/suzuki_hoge/books/2022-03-docker-practice-8ae36c33424b59
   - [work](./work) で演習
   - `docker image build --file=./docker/app/Dockerfile --tag docker-practice:app .`
   - > この本ではいきなり Dockerfile を書きましたが、構築手順が定かではない場合はこの方法は効率が悪い です。「PHP のインストールってこれでいいのかな」「msmtp ってどうやってインストールするんだろう」という状態なら、一度ただベースイメージを起動して自分で bash で試行錯誤する とよいでしょう。
+  - `--env`
+  - > 接続してから /etc/os-release を見ると Alpine Linux であることがわかるのですが、軽量であることを重視した Alpine Linux をベースとしたイメージには curl はおろか bash も入っていない場合が大半です。
+  - > また、sudo もないため --user オプションで root として sh を起動します。
+    ```
+    $ docker container exec  \
+    --interactive        \
+    --tty                \
+    --user root          \
+    mail                 \
+    sh
+    ```
