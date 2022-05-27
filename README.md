@@ -149,3 +149,24 @@ ref: https://zenn.dev/suzuki_hoge/books/2022-03-docker-practice-8ae36c33424b59
     mail                 \
     sh
     ```
+  - ボリューム作成
+    - `docker volume create --name docker-practice-db-volume`
+    - `docker volume ls`  
+    - `--volume` 、 `--mount`
+      ```
+      $ docker container run                                \
+      --name db                                         \
+      --rm                                              \
+      --detach                                          \
+      --platform linux/amd64                            \
+      --env MYSQL_ROOT_PASSWORD=rootpassword            \
+      --env MYSQL_USER=hoge                             \
+      --env MYSQL_PASSWORD=password                     \
+      --env MYSQL_DATABASE=event                        \
+      --volume docker-practice-db-volume:/var/lib/mysql \
+      docker-practice:db
+      ```
+   - > --volume オプションの方が短くかけますが、【 ３部: バインドマウント 】も混じるとかなりわかりづらい記述になります。
+     > : 区切りのルールなどを知らないと正しく読むこともままならないので、マウントするときは読みやすい --mount オプションを使う方が良い でしょう。
+     > --mount オプションの方が Docker Compose と互いに読み換えやすいという利点もあります。
+       
